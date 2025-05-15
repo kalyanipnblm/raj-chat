@@ -1,0 +1,32 @@
+<div class="background"></div>
+<div class="chat-container">
+  <div class="messages">
+    <div
+      *ngFor="let message of messages"
+      class="message-wrapper"
+      [ngClass]="message.role"       
+    >
+      <!-- bot avatar on the left -->
+      <div class="avatar" *ngIf="message.role === 'bot'">
+        <span class="R">R</span>
+      </div>
+
+      <!-- the actual bubble -->
+      <div class="message">
+        {{ message.text }}
+      </div>
+
+      <!-- user avatar on the right -->
+      <div class="avatar user-avatar" *ngIf="message.role === 'user'">
+        <span class="U"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="input-bar">
+    <input type="text" placeholder="Ask me anything" />
+    <button>Send</button>
+  </div>
+</div>
+
+
