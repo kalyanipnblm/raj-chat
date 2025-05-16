@@ -40,3 +40,24 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+
+# Node and Angular
+node_modules/
+dist/
+.angular/
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.env
+
+# OS & editor-specific
+.DS_Store
+.vscode/
+.idea/
+
+# Logs
+*.log
+
