@@ -4,29 +4,36 @@
     <div
       *ngFor="let message of messages"
       class="message-wrapper"
-      [ngClass]="message.role"       
+      [ngClass]="message.role"
     >
-      <!-- bot avatar on the left -->
+      <!-- Bot avatar on the left -->
       <div class="avatar" *ngIf="message.role === 'bot'">
         <span class="R">R</span>
       </div>
 
-      <!-- the actual bubble -->
+      <!-- The actual message bubble -->
       <div class="message">
         {{ message.text }}
       </div>
 
-      <!-- user avatar on the right -->
+      <!-- User avatar on the right -->
       <div class="avatar user-avatar" *ngIf="message.role === 'user'">
-        <span class="U"></span>
+        <span class="U">U</span>
       </div>
     </div>
   </div>
 
+  <!-- ✅ Input bar with bindings -->
   <div class="input-bar">
-    <input type="text" placeholder="Ask me anything" />
-    <button>Send</button>
+    <input
+      type="text"
+      placeholder="Ask me anything"
+      [(ngModel)]="userInput"
+      (keyup.enter)="sendMessage()"
+    />
+    <button (click)="sendMessage()">Send</button>
   </div>
 </div>
+
 
 
