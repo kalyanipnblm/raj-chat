@@ -11,16 +11,44 @@
 
   <div class="prompt-box">
     <h2>What can I do for you?</h2>
+
+    <div class="margin-bottom: 1rem; display: flex; gap: 0.5rem;">
+      <input
+        [(ngModel)]="customInput"
+        placeholder="Type your own questions..."
+        style="flex: 1; padding: 0.5rem; border-radius: 10px; border: none;"
+      />
+      <button (click)="goToChat(customInput)">Send</button>
+    </div>
+
+
     <div class="second-prompt-box">
       <div class="prompt-buttons">
-        <button>Summarize our latest survey insights.</button>
-        <button>Draft a 2-sentence brand elevator pitch.</button>
-        <button>Recommend a social-media posting schedule.</button>
-        <button>Name our 2 highest-value audience segments.</button>
-        <button>Identify the top 3 messaging pillars.</button>
-        <button>List our brand’s top strengths and weaknesses.</button>
-        <button>Suggest a sustainability-focused campaign theme.</button>
-        <button>Generate messaging for a Gen Z audience.</button>
+
+        <button (click)="goToChat('Summarize our latest survey insights.')">
+          Summarize our latest survey insights.
+        </button>
+        <button (click)="goToChat('Draft a 2-sentence brand elevator pitch.')">
+          Draft a 2-sentence brand elevator pitch.
+        </button>
+        <button (click)="goToChat('Recommend a social-media posting schedule.')">
+          Recommend a social-media posting schedule.
+        </button>
+        <button (click)="goToChat('Name our 2 highest-value audience segments.')">
+          Name our 2 highest-value audience segments.
+        </button>
+        <button (click)="goToChat('Identify the top 3 messaging pillars.')">
+          Identify the top 3 messaging pillars.
+        </button>
+        <button (click)="goToChat('List our brand’s top strengths and weaknesses.')">
+          List our brand’s top strengths and weaknesses.
+        </button>
+        <button (click)="goToChat('Suggest a sustainability-focused campaign theme.')">
+          Suggest a sustainability-focused campaign theme.
+        </button>
+        <button (click)="goToChat('Generate messaging for a Gen Z audience.')">
+          Generate messaging for a Gen Z audience.
+        </button>
       </div>
     </div>  
   </div>
