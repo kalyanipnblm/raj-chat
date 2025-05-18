@@ -10,15 +10,14 @@
   </div>
 
   <div class="prompt-box">
-    <h2>What can I do for you?</h2>
-
-    <div class="margin-bottom: 1rem; display: flex; gap: 0.5rem;">
+    <div class="prompt-heading">
       <input
         [(ngModel)]="customInput"
-        placeholder="Type your own questions..."
-        style="flex: 1; padding: 0.5rem; border-radius: 10px; border: none;"
+        (keydown.enter)="goToChat(customInput)"
+        placeholder="What can I do for you?"
+        class="prompt-input"
       />
-      <button (click)="goToChat(customInput)">Send</button>
+      <button class="prompt-send" (click)="goToChat(customInput)">Send</button>
     </div>
 
 
