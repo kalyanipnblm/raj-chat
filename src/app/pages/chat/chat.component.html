@@ -1,27 +1,7 @@
 <div class="background"></div>
 <div class="chat-container">
-  <div class="messages">
-    <div
-      *ngFor="let message of messages"
-      class="message-wrapper"
-      [ngClass]="message.role"
-    >
-      <!-- Bot avatar on the left -->
-      <div class="avatar" *ngIf="message.role === 'bot'">
-        <span class="R">R</span>
-      </div>
-
-      <!-- The actual message bubble -->
-      <div class="message">
-        {{ message.text }}
-      </div>
-
-      <!-- User avatar on the right -->
-      <div class="avatar user-avatar" *ngIf="message.role === 'user'">
-        <span class="U">U</span>
-      </div>
-    </div>
-  </div>
+  
+  <app-chat-window [messages]="messages"></app-chat-window>
 
   <div class="input-bar">
     <input

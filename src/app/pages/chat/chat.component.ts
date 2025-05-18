@@ -1,33 +1,42 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
+import { CommonModule }    from '@angular/common';
+import { FormsModule }     from '@angular/forms';
+import { HttpClientModule }from '@angular/common/http';
+import { ActivatedRoute }  from '@angular/router';    
 
-import { ChatService, ChatResponse } from '../../services/chat.service';  // ← import ChatResponse
+import {
+  ChatWindowComponent,
+  Message
+} from './chat-window/chat-window.component';
+import { ChatService, ChatResponse } from '../../services/chat.service';
 
 @Component({
   selector: 'app-chat',
   standalone: true,
-  imports: [ CommonModule, FormsModule, HttpClientModule ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    HttpClientModule,
+    ChatWindowComponent
+  ],
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit {
-  messages: { role: 'user' | 'bot'; text: string }[] = [];
+  messages: Message[] = [];
   userInput = '';
 
   constructor(
-    private route: ActivatedRoute,
-    private chatService: ChatService
+    private chatService: ChatService,
+    private route: ActivatedRoute        
   ) {}
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      const userMessage = params['message'];
-      if (userMessage) {
-        this.messages.push({ role: 'user', text: userMessage });
-        this.getBotReply(userMessage);
+      const prompt = params['message'];
+      if (prompt && prompt.trim()) {
+        this.messages.push({ role: 'user', text: prompt });
+        this.getBotReply(prompt);
       }
     });
   }
@@ -35,16 +44,17 @@ export class ChatComponent implements OnInit {
   sendMessage() {
     const text = this.userInput.trim();
     if (!text) return;
-
     this.messages.push({ role: 'user', text });
     this.getBotReply(text);
     this.userInput = '';
   }
 
-  getBotReply(userText: string) {
-    this.chatService.sendMessage(userText)
-      .subscribe((res: ChatResponse) => {    // now ChatResponse is recognized
+  private getBotReply(text: string) {
+    this.chatService.sendMessage(text)
+      .subscribe((res: ChatResponse) => {
         this.messages.push({ role: 'bot', text: res.reply });
       });
   }
 }
+
+
