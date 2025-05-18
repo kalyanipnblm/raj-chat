@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface ChatRequest {
-  text: string;
+  message: string;      
 }
 
 export interface ChatResponse {
@@ -19,7 +19,8 @@ export class ChatService {
   constructor(private http: HttpClient) {}
 
   sendMessage(text: string): Observable<ChatResponse> {
-    const body: ChatRequest = { text };
+    const body: ChatRequest = { message: text }; 
     return this.http.post<ChatResponse>(this.apiUrl, body);
   }
 }
+
