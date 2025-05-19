@@ -2,17 +2,23 @@ import { Injectable } from '@angular/core';
 import { HttpClient }   from '@angular/common/http';
 import { Observable }   from 'rxjs';
 
+import { environment } from '../../environments/environment';
+
 export interface ChatRequest  { message: string; }
 export interface ChatResponse { reply: string; }
 
 @Injectable({ providedIn: 'root' })
 export class ChatService {
-  private base = 'http://127.0.0.1:8000';
+
+  private base = environment.apiBase;
 
   constructor(private http: HttpClient) {}
 
   sendMessage(text: string): Observable<ChatResponse> {
-    return this.http.post<ChatResponse>(`${this.base}/chat`, { message: text });
+    return this.http.post<ChatResponse>(
+      `${this.base}/chat`,
+      { message: text }
+    );
   }
 
   getHistory(): Observable<Array<{ role: 'user'|'bot'; text: string }>> {
