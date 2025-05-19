@@ -22,7 +22,10 @@ def on_startup():
     
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:4200"],
+    allow_origins=[
+        "http://localhost:4200",                    
+        "https://raj-chat-jqtz.onrender.com"        # deployed UI
+    ],
     allow_methods=["*"],
     allow_headers=["*"],
 )
