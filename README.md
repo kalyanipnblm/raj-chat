@@ -1,59 +1,132 @@
 # RajChat
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.12.
+This repository contains a full‑stack AI chat application called Raj Chat, built to demonstrate proficiency in TypeScript/Angular (frontend), Python/FastAPI (backend), and AI integration via OpenAI. 
 
-## Development server
+**Live Demo:** https://raj-chat-jqtz.onrender.com
 
-To start a local development server, run:
+---
+## Table of Contents
+
+- [Project Overview](#project-overview)
+- [Tech Stack](#tech-stack)  
+- [Demo](#demo)  
+- [Architecture](#architecture)
+- [Getting Started](#getting-started)  
+  - [Prerequisites](#prerequisites)  
+  - [Local Installation](#local-installation)  
+- [Deployment](#deployment)  
+
+---
+## Project Overview
+
+Raj Chat allows users to ask marketing and brand‑strategy questions through a sleek Angular interface. User inputs are sent to a FastAPI backend, which forwards the query (plus system context) to OpenAI’s GPT‑3.5‑turbo model. Responses stream back and display as chat bubbles. Features:
+
+Real-time chat with a FastAPI-powered AI backend.
+
+Interactive Chat UI with avatars and auto‑scrolling message pane.
+
+Question Presets on the welcome page and a custom input field.
+
+OpenAI Integration with environment‑configured API key.
+
+Persistent Chat History stored in SQLite (via SQLModel).
+
+---
+## Tech Stack
+
+- **Frontend:** Angular 16, TypeScript, SCSS, HTML  
+- **Backend:** FastAPI, Python 3.11, Uvicorn, SQLModel (SQLite)
+- **AI:** openai Python client (GPT‑3.5‑turbo)
+- **Version Control:** Git, GitHub
+- **Environment Management:** python‑dotenv
+- **Deployment:** Render (Static Site + Web Service)  
+
+
+---
+## Demo
+
+![Screenshot of Raj-Chat](./docs/screenshot-welcome-page.png)
+
+Visit the live app here:  
+👉 https://raj-chat-jqtz.onrender.com
+
+---
+## Architecture
+
+- Frontend runs at http://localhost:4200
+
+- Backend runs at http://localhost:8000
+
+- SQLite database persists chat messages
+
+---
+## Getting Started
+
+### Prerequisites
+
+- Node.js & npm
+- Python 3.10+
+- Git
+
+### Local Installation
+
+1. **Clone the repo**
 
 ```bash
+git clone https://github.com/kalyanipnblm/raj-chat.git
+cd raj-chat
+```
+
+2. **Backend setup**
+
+```bash
+cd backend
+python -m venv .venv
+source .venv/bin/activate   
+pip install -r requirements.txt
+uvicorn main:app --reload --port 8000
+```
+
+2. **Frontend setup**
+
+In a separate terminal:
+
+```bash
+cd raj-chat
+npm ci
 ng serve
 ```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
+3. **Environment Variables**
+Create a .env file in the raj-backend/ directory:
 ```bash
-ng generate component component-name
+OPENAI_API_KEY=sk-...
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Deployment
 
+### On Render 
+
+1. **Static Site (UI)**
+
+- Build command: 
 ```bash
-ng generate --help
+npm ci && ng build --configuration production
+```
+- Publish directory: 
+```bash
+dist/raj-chat/browser
 ```
 
-## Building
+2. **Web Service (API)**
 
-To build the project run:
-
+- Build command: 
 ```bash
-ng build
+pip install -r requirements.txt
+```
+- Start command: 
+```bash
+uvicorn main:app --host 0.0.0.0 --port 10000
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Once both services are up, the app is live at: https://raj-chat-jqtz.onrender.com
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
