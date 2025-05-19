@@ -2,7 +2,6 @@ from dotenv import load_dotenv
 load_dotenv()           
 
 import os
-print("Loaded OPENAI_API_KEY:", os.getenv("OPENAI_API_KEY"))
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
